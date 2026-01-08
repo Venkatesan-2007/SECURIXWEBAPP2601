@@ -72,65 +72,87 @@ export default function Events() {
     fetchEvents();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="page-container" style={{ textAlign: 'center', padding: '120px 0' }}>
+        Loading events...
+      </div>
+    );
+  }
+
   return (
-    <div className="page-section">
-      <div className="page-section-content">
-        <h2>Upcoming Events & <GradientText>Webinars</GradientText></h2>
-        <p className="section-description">
-          Join our training sessions, webinars, and conferences to stay updated with the latest cybersecurity trends and best practices.
-        </p>
-
-        <div style={{ backgroundColor: "#f8f9fa", padding: "40px", borderRadius: "12px", marginBottom: "60px" }}>
-          <p style={{ fontSize: "16px", lineHeight: "1.8", color: "#333" }}>
-            We regularly organize industry-leading events, training programs, and conferences to help professionals and organizations stay ahead of cybersecurity threats. Whether you are a developer, security professional, or business executive, our events provide valuable insights and networking opportunities.
-          </p>
+    <div className="events-page">
+      {/* Hero Section */}
+      <section className="hero-section" style={{ minHeight: '60vh', background: 'var(--light-gray)' }}>
+        <div className="page-container">
+          <div className="hero-content" style={{ maxWidth: '900px' }}>
+            <h1 className="hero-title">
+              Upcoming <span style={{ color: 'var(--primary)' }}>Events</span>
+            </h1>
+            <p className="hero-description">
+              Join our training sessions, webinars, and conferences to stay updated with the latest cybersecurity trends and best practices.
+            </p>
+          </div>
         </div>
+      </section>
 
-        <h3 style={{ marginBottom: "40px" }}>Featured Events</h3>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "30px" }}>
-          {events.map((event, index) => (
-            <div key={index} style={{ padding: "30px", border: "1px solid #e0e0e0", borderRadius: "8px", backgroundColor: "white", transition: "all 0.3s ease" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: "15px" }}>
-                <h4 style={{ color: "#0f172a", margin: "0" }}>{event.title}</h4>
-                <span style={{ backgroundColor: "#e74c3c", color: "white", padding: "6px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "600" }}>{event.type}</span>
+      {/* Events Section */}
+      <section className="services-section">
+        <div className="page-container">
+          <div className="section-header">
+            <div className="section-subtitle">Our Events</div>
+            <h2>Featured Events</h2>
+          </div>
+          <div className="services-grid">
+            {events.map((event, index) => (
+              <div key={index} className="service-card">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                  <h3 style={{ margin: 0 }}>{event.title}</h3>
+                  <span className="project-badge" style={{ backgroundColor: 'var(--primary)' }}>{event.type}</span>
+                </div>
+                <p>{event.description}</p>
+                <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+                  <p style={{ color: 'var(--medium-gray)', margin: 0 }}>📅 {event.date}</p>
+                  <p style={{ color: 'var(--medium-gray)', margin: '0.5rem 0 0' }}>⏰ {event.time}</p>
+                </div>
+                <button className="btn-primary" style={{ width: '100%', marginTop: '1.5rem' }}>Register Now</button>
               </div>
-              <p style={{ color: "#666", fontSize: "14px", marginBottom: "10px" }}>{event.description}</p>
-              <div style={{ borderTop: "1px solid #eee", paddingTop: "15px", marginTop: "15px" }}>
-                <p style={{ color: "#e74c3c", fontSize: "14px", fontWeight: "600", margin: "5px 0" }}>📅 {event.date}</p>
-                <p style={{ color: "#666", fontSize: "14px", margin: "5px 0" }}>⏰ {event.time}</p>
-              </div>
-              <button style={{ marginTop: "15px", padding: "10px 20px", backgroundColor: "#e74c3c", color: "white", border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: "600", width: "100%" }}>Register Now</button>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div style={{ marginTop: "80px" }}>
-          <h3 style={{ marginBottom: "40px" }}>Event Categories</h3>
-          <div className="grid-4" style={{ gap: "30px" }}>
-            <div style={{ padding: "30px", border: "1px solid #e0e0e0", borderRadius: "8px", textAlign: "center" }}>
-              <div style={{ fontSize: "40px", marginBottom: "15px" }}>🎓</div>
-              <h4>Training Programs</h4>
-              <p style={{ fontSize: "14px", color: "#666" }}>Hands-on technical training for security professionals</p>
+      {/* Event Categories Section */}
+      <section className="projects-section">
+        <div className="page-container">
+          <div className="section-header">
+            <div className="section-subtitle">Categories</div>
+            <h2>Event Categories</h2>
+          </div>
+          <div className="services-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div className="service-card">
+              <div className="service-icon">🎓</div>
+              <h3>Training Programs</h3>
+              <p>Hands-on technical training for security professionals.</p>
             </div>
-            <div style={{ padding: "30px", border: "1px solid #e0e0e0", borderRadius: "8px", textAlign: "center" }}>
-              <div style={{ fontSize: "40px", marginBottom: "15px" }}>📹</div>
-              <h4>Webinars</h4>
-              <p style={{ fontSize: "14px", color: "#666" }}>Online sessions with industry experts and thought leaders</p>
+            <div className="service-card">
+              <div className="service-icon">📹</div>
+              <h3>Webinars</h3>
+              <p>Online sessions with industry experts and thought leaders.</p>
             </div>
-            <div style={{ padding: "30px", border: "1px solid #e0e0e0", borderRadius: "8px", textAlign: "center" }}>
-              <div style={{ fontSize: "40px", marginBottom: "15px" }}>🏢</div>
-              <h4>Conferences</h4>
-              <p style={{ fontSize: "14px", color: "#666" }}>Large-scale events with keynotes, workshops, and networking</p>
+            <div className="service-card">
+              <div className="service-icon">🏢</div>
+              <h3>Conferences</h3>
+              <p>Large-scale events with keynotes, workshops, and networking.</p>
             </div>
-            <div style={{ padding: "30px", border: "1px solid #e0e0e0", borderRadius: "8px", textAlign: "center" }}>
-              <div style={{ fontSize: "40px", marginBottom: "15px" }}>🎯</div>
-              <h4>Workshops</h4>
-              <p style={{ fontSize: "14px", color: "#666" }}>Focused sessions on specific security topics and tools</p>
+            <div className="service-card">
+              <div className="service-icon">🎯</div>
+              <h3>Workshops</h3>
+              <p>Focused sessions on specific security topics and tools.</p>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

@@ -1,38 +1,97 @@
 import React, { useState, useEffect } from "react";
 import { GradientText } from "../components/TextReveal";
+import Roadmap from '../components/Roadmap';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const defaultTeam = [
   {
-    name: 'Rajesh Kumar',
-    position: 'Chief Security Officer',
-    bio: '15+ years in cybersecurity with experience at Fortune 500 companies'
+    name: 'M. Hajmal rfan',
+    position: 'Founder',
+    bio: 'Vision, strategy, and long-term direction.'
   },
   {
-    name: 'Priya Sharma',
-    position: 'Lead Security Architect',
-    bio: 'Certified in CISSP, AWS, and cloud security practices'
+    name: 'D. Venkatesh',
+    position: 'Co-Founder',
+    bio: 'Strategic support, growth planning, and operational alignment.'
   },
   {
-    name: 'Amit Patel',
-    position: 'Penetration Testing Lead',
-    bio: 'Certified ethical hacker with extensive penetration testing experience'
+    name: 'Hari Haran J',
+    position: 'CEO',
+    bio: 'Business leadership, execution, and expansion.'
   },
   {
-    name: 'Sarah Williams',
-    position: 'Incident Response Manager',
-    bio: 'Specialized in breach investigation and incident response'
+    name: 'Gayathri',
+    position: 'Co-CEO',
+    bio: 'Shared leadership, decision-making, and organizational growth.'
   },
   {
-    name: 'Michael Chen',
-    position: 'IoT Security Specialist',
-    bio: 'Expert in IoT forensics and embedded systems security'
+    name: 'Krithik Raj',
+    position: 'CTO',
+    bio: 'Technology vision, architecture, and innovation.'
   },
   {
-    name: 'Ananya Singh',
-    position: 'Training & Consulting Lead',
-    bio: 'Develops and delivers customized security training programs'
+    name: 'Kirubakaran',
+    position: 'COO',
+    bio: 'Operations, delivery excellence, and process management.'
+  },
+  {
+    name: 'Mohamed Yasin J',
+    position: 'HR',
+    bio: 'Talent, culture, and people operations.'
+  },
+  {
+    name: 'Yogeshwaran S',
+    position: 'Social Media Handling',
+    bio: 'Brand visibility, engagement, and digital strategy.'
+  },
+  {
+    name: 'Jagadeesh A',
+    position: 'Lead UI/UX Designer',
+    bio: 'User-first design, experience, and interface clarity.'
+  },
+  {
+    name: 'Sanjay M',
+    position: 'Animation Designer',
+    bio: 'Motion design and visual storytelling.'
+  },
+  {
+    name: 'Venkatesh D',
+    position: 'Senior Developer',
+    bio: 'Secure, scalable, high-performance development.'
+  },
+  {
+    name: 'Jegan',
+    position: 'Development Head',
+    bio: 'Technical leadership and project execution.'
+  },
+  {
+    name: 'Pravin P',
+    position: 'Frontend Developer',
+    bio: 'Responsive, modern, and performance-driven UI.'
+  },
+];
+
+const roadmapItems = [
+  {
+    year: '2023',
+    title: 'Company Foundation',
+    description: 'Securix was founded with the mission to provide top-tier cybersecurity solutions.'
+  },
+  {
+    year: '2024',
+    title: 'Expansion of Services',
+    description: 'Expanded our services to include IoT forensics and cloud security.'
+  },
+  {
+    year: '2025',
+    title: 'First 100 Clients',
+    description: 'Reached a milestone of serving over 100 enterprise clients globally.'
+  },
+  {
+    year: '2026',
+    title: 'Future Vision',
+    description: 'Continuing to innovate and lead the cybersecurity industry with cutting-edge solutions.'
   }
 ];
 
@@ -60,61 +119,96 @@ export default function Team() {
     fetchTeam();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="page-container" style={{ textAlign: 'center', padding: '120px 0' }}>
+        Loading team data...
+      </div>
+    );
+  }
+
   return (
-    <div className="page-section">
-      <div className="page-section-content">
-        <h2>Our Expert <GradientText>Team</GradientText></h2>
-        
-        <p className="section-description">
-          Meet the certified security professionals and ethical hackers shaping a secure digital world. Our team brings decades of combined experience from leading global organizations.
-        </p>
-
-        {/* Team Overview */}
-        <div style={{ backgroundColor: '#f8f9fa', padding: '40px', borderRadius: '12px', marginBottom: '60px' }}>
-          <p style={{ fontSize: '16px', lineHeight: '1.8', color: '#333' }}>
-            Our diverse team of security professionals includes certified ethical hackers, system architects, forensic investigators, and security consultants. We are committed to staying at the forefront of cybersecurity innovation and best practices.
-          </p>
+    <div className="team-page">
+      {/* Hero Section */}
+      <section className="hero-section" style={{ minHeight: '60vh', background: 'var(--light-gray)' }}>
+        <div className="page-container">
+          <div className="hero-content" style={{ maxWidth: '900px' }}>
+            <h1 className="hero-title">
+              Meet Our Expert <span style={{ color: 'var(--primary)' }}>Team</span>
+            </h1>
+            <p className="hero-description">
+              Meet the certified security professionals and ethical hackers shaping a secure digital world. Our team brings decades of combined experience from leading global organizations.
+            </p>
+          </div>
         </div>
+      </section>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
-          {team.map((member, index) => (
-            <div key={index} style={{ padding: '30px', border: '1px solid #e0e0e0', borderRadius: '8px', backgroundColor: 'white', transition: 'all 0.3s ease' }}>
-              {member.image ? (
-                <img src={member.image} alt={member.name} style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', marginBottom: '20px' }} />
-              ) : (
-                <div style={{ width: '80px', height: '80px', borderRadius: '50%', backgroundColor: '#e74c3c', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '32px', marginBottom: '20px' }}>
-                  {member.name.charAt(0)}
-                </div>
-              )}
-              <h4 style={{ color: '#0f172a', marginBottom: '5px' }}>{member.name}</h4>
-              <p style={{ color: '#e74c3c', fontWeight: '600', fontSize: '14px', marginBottom: '10px' }}>{member.position || member.role}</p>
-              <p style={{ color: '#666', fontSize: '14px', lineHeight: '1.6' }}>{member.bio}</p>
-            </div>
-          ))}
+      {/* Team Members Section */}
+      <section className="services-section">
+        <div className="page-container">
+          <div className="section-header">
+            <div className="section-subtitle">Our Leadership</div>
+            <h2>The Minds Behind Securix</h2>
+            <p className="section-description">
+              Dedicated to innovation, integrity, and securing your digital future.
+            </p>
+          </div>
+          <div className="services-grid">
+            {team.map((member, index) => (
+              <div key={index} className="service-card">
+                {member.image ? (
+                  <img src={member.image} alt={member.name} style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', marginBottom: '20px' }} />
+                ) : (
+                  <div className="service-icon" style={{ backgroundColor: 'var(--primary-light)', color: 'var(--primary)' }}>
+                    {member.name.charAt(0)}
+                  </div>
+                )}
+                <h3>{member.name}</h3>
+                <p style={{ color: 'var(--medium-gray)', marginBottom: '10px' }}>{member.position}</p>
+                <p>{member.bio}</p>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Why Our Team */}
-        <div style={{ marginTop: '80px' }}>
-          <h3 style={{ marginBottom: '40px' }}>Why Our Team Stands Out</h3>
-          <div className="grid-3" style={{ gap: '30px' }}>
-            <div style={{ padding: '30px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
-              <div style={{ fontSize: '32px', marginBottom: '15px' }}>🎓</div>
-              <h4>Certified Professionals</h4>
-              <p style={{ color: '#666', fontSize: '14px', lineHeight: '1.6' }}>CISSP, CEH, OSCP, and other industry-recognized certifications</p>
+      {/* Why Our Team Stands Out Section */}
+      <section className="projects-section">
+        <div className="page-container">
+          <div className="section-header">
+            <div className="section-subtitle">Our Edge</div>
+            <h2>Why Our Team Stands Out</h2>
+          </div>
+          <div className="services-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+            <div className="service-card">
+              <div className="service-icon">🎓</div>
+              <h3>Certified Professionals</h3>
+              <p>CISSP, CEH, OSCP, and other industry-recognized certifications.</p>
             </div>
-            <div style={{ padding: '30px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
-              <div style={{ fontSize: '32px', marginBottom: '15px' }}>🚀</div>
-              <h4>Latest Technologies</h4>
-              <p style={{ color: '#666', fontSize: '14px', lineHeight: '1.6' }}>Always updated with the latest security tools and methodologies</p>
+            <div className="service-card">
+              <div className="service-icon">🚀</div>
+              <h3>Latest Technologies</h3>
+              <p>Always updated with the latest security tools and methodologies.</p>
             </div>
-            <div style={{ padding: '30px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
-              <div style={{ fontSize: '32px', marginBottom: '15px' }}>🤝</div>
-              <h4>Client-Focused</h4>
-              <p style={{ color: '#666', fontSize: '14px', lineHeight: '1.6' }}>Dedicated to understanding and solving your unique security challenges</p>
+            <div className="service-card">
+              <div className="service-icon">🤝</div>
+              <h3>Client-Focused</h3>
+              <p>Dedicated to understanding and solving your unique security challenges.</p>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Roadmap Section */}
+      <section className="services-section">
+        <div className="page-container">
+          <div className="section-header">
+            <div className="section-subtitle">Our Journey</div>
+            <h2>Company Roadmap</h2>
+          </div>
+          <Roadmap items={roadmapItems} />
+        </div>
+      </section>
     </div>
   );
 }

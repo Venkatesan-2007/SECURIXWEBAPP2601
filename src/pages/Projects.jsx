@@ -8,7 +8,6 @@ export default function Projects() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Sample case studies - these can be replaced/managed via admin panel
   const defaultProjects = [
     {
       id: 1,
@@ -91,76 +90,78 @@ export default function Projects() {
     fetchProjects();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="page-container" style={{ textAlign: 'center', padding: '120px 0' }}>
+        Loading projects...
+      </div>
+    );
+  }
+
   return (
-    <>
+    <div className="projects-page">
       {/* Hero Section */}
-      <section className="page-section project-hero">
+      <section className="hero-section" style={{ minHeight: '60vh', background: 'var(--light-gray)' }}>
         <div className="page-container">
-          <h1>Our Portfolio & Case Studies</h1>
-          <p className="section-description">
-            Explore successful security assessments, applications developments, and security implementations across industries
-          </p>
+          <div className="hero-content" style={{ maxWidth: '900px' }}>
+            <h1 className="hero-title">
+              Our <span style={{ color: 'var(--primary)' }}>Projects</span>
+            </h1>
+            <p className="hero-description">
+              Explore successful security assessments, applications developments, and security implementations across industries.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Projects Grid Section */}
-      <section className="page-section projects-grid-section">
+      <section className="projects-section">
         <div className="page-container">
+          <div className="section-header">
+            <div className="section-subtitle">Our Work</div>
+            <h2>Case Studies</h2>
+          </div>
           <div className="projects-grid">
-            {projects && projects.length > 0 ? (
-              projects.map((project, index) => (
-                <div key={project.id || index} className="project-detail-card">
-                  <div className="project-header">
-                    <span className="project-category">{project.category || "Case Study"}</span>
-                    <h3>{project.name}</h3>
-                    <p className="project-client">Client: {project.client}</p>
-                  </div>
-                  
-                  <p className="project-description">{project.description}</p>
-                  
-                  {project.results && project.results.length > 0 && (
-                    <div className="project-results">
-                      <h4>Key Results</h4>
-                      <ul>
-                        {project.results.map((result, idx) => (
-                          <li key={idx}>✓ {result}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  
-                  {project.technologies && project.technologies.length > 0 && (
-                    <div className="project-technologies">
-                      <h4>Technologies Used</h4>
-                      <div className="tech-tags">
-                        {project.technologies.map((tech, idx) => (
-                          <span key={idx} className="tech-tag">{tech}</span>
-                        ))}
+            {projects.map((project, index) => (
+              <div key={project.id || index} className="project-card">
+                <div className="project-badge">{project.category || "Case Study"}</div>
+                <h3 className="project-client">{project.client}</h3>
+                <h4>{project.name}</h4>
+                <p className="project-description">{project.description}</p>
+                {project.results && (
+                  <div className="project-stats" style={{flexDirection: 'column', alignItems: 'flex-start'}}>
+                    {project.results.map((result, idx) => (
+                      <div key={idx} className="stat" style={{textAlign: 'left'}}>
+                        <p className="stat-label" style={{textTransform: 'none'}}>✓ {result}</p>
                       </div>
-                    </div>
-                  )}
-                </div>
-              ))
-            ) : (
-              <div className="no-projects-placeholder">
-                <p>
-                  Featured projects and case studies coming soon! See how we help businesses secure their digital assets.
-                </p>
+                    ))}
+                  </div>
+                )}
+                {project.technologies && (
+                  <div className="project-tags">
+                    {project.technologies.map((tech, idx) => (
+                      <span key={idx} className="tag">{tech}</span>
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
+            ))}
           </div>
         </div>
       </section>
 
       {/* Call to Action Section */}
-      <section className="page-section projects-cta">
+      <section className="cta-section">
         <div className="page-container">
-          <h2>Ready to Start Your Security Journey?</h2>
-          <p>Contact our experts for a customized security assessment</p>
-          <button className="cta-button primary" onClick={() => navigate('/contact')}>Schedule Consultation</button>
+          <div className="cta-content">
+            <h2>Ready to Start Your Security Journey?</h2>
+            <p className="cta-description">Contact our experts for a customized security assessment</p>
+            <div className="cta-actions">
+              <button className="btn-primary" onClick={() => navigate('/contact')}>Schedule Consultation</button>
+            </div>
+          </div>
         </div>
       </section>
-    </>
+    </div>
   );
-
 }
