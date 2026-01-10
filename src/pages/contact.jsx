@@ -62,11 +62,11 @@ export default function Contact() {
   return (
     <div className="contact-page">
       {/* Hero Section */}
-      <section className="hero-section" style={{ minHeight: '60vh', background: 'var(--light-gray)' }}>
+      <section className="hero-section contact-hero-section">
         <div className="page-container">
-          <div className="hero-content" style={{ maxWidth: '900px' }}>
+          <div className="hero-content">
             <h1 className="hero-title">
-              Get in <span style={{ color: 'var(--primary)' }}>Touch</span>
+              Get in <span className="text-primary">Touch</span>
             </h1>
             <p className="hero-description">
               Connect with our cybersecurity experts. We're here to discuss your security needs and help you build a secure digital future.
@@ -76,50 +76,50 @@ export default function Contact() {
       </section>
 
       {/* Contact Section */}
-      <section className="services-section">
+      <section className="services-section contact-section">
         <div className="page-container">
           <div className="section-header">
             <div className="section-subtitle">Contact Us</div>
             <h2>We're Here to Help</h2>
           </div>
-          <div className="services-grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+          <div className="services-grid contact-grid">
             {/* Contact Info */}
-            <div className="service-card">
+            <div className="service-card contact-info-card">
               <h3>Contact Information</h3>
-              <div style={{ marginBottom: '1.5rem' }}>
+              <div className="contact-detail">
                 <h4>📧 Email</h4>
-                <p><a href="mailto:care.securix@gmail.com" style={{ color: 'var(--primary)', textDecoration: 'none' }}>care.securix@gmail.com</a></p>
+                <p><a href="mailto:care.securix@gmail.com" className="link-primary">care.securix@gmail.com</a></p>
               </div>
-              <div style={{ marginBottom: '1.5rem' }}>
+              <div className="contact-detail">
                 <h4>📞 Phone</h4>
-                <p><a href="tel:+917598557161" style={{ color: 'var(--primary)', textDecoration: 'none' }}>+91 759-855-7161</a></p>
+                <p><a href="tel:+917598557161" className="link-primary">+91 759-855-7161</a></p>
               </div>
-              <div style={{ marginBottom: '1.5rem' }}>
+              <div className="contact-detail">
                 <h4>⏰ Response Time</h4>
                 <p>We typically respond within 24 hours during business days.</p>
               </div>
-              <div>
+              <div className="contact-socials">
                 <h4>🔗 Follow Us</h4>
-                <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                <div className="social-icons">
                   <a href="https://www.instagram.com/_securix_" target="_blank" rel="noreferrer" title="Instagram">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style={{ width: '32px', height: '32px' }} />
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" className="social-icon" />
                   </a>
                   <a href="https://wa.me/917010000000?text=Hello%20Securix%20Service" target="_blank" rel="noreferrer" title="WhatsApp">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" style={{ width: '32px', height: '32px' }} />
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" className="social-icon" />
                   </a>
                   <a href="https://www.linkedin.com/company/securix-service/about/" target="_blank" rel="noreferrer" title="LinkedIn">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384014.png" alt="LinkedIn" style={{ width: '32px', height: '32px' }} />
+                    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384014.png" alt="LinkedIn" className="social-icon" />
                   </a>
                 </div>
               </div>
             </div>
 
             {/* Contact Form */}
-            <div className="service-card">
+            <div className="service-card contact-form-card">
               <h3>Send Us a Message</h3>
               <form onSubmit={handleSubmit} className="contact-form">
-                <div className="form-group" style={{ marginBottom: '1rem' }}>
-                  <label htmlFor="name" style={{ display: 'block', marginBottom: '0.5rem' }}>Full Name *</label>
+                <div className="form-group">
+                  <label htmlFor="name">Full Name *</label>
                   <input
                     type="text"
                     id="name"
@@ -129,11 +129,10 @@ export default function Contact() {
                     required
                     placeholder="Your full name"
                     className="form-control"
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--border-radius-sm)', border: '1px solid var(--border)' }}
                   />
                 </div>
-                <div className="form-group" style={{ marginBottom: '1rem' }}>
-                  <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem' }}>Email Address *</label>
+                <div className="form-group">
+                  <label htmlFor="email">Email Address *</label>
                   <input
                     type="email"
                     id="email"
@@ -143,11 +142,10 @@ export default function Contact() {
                     required
                     placeholder="your@email.com"
                     className="form-control"
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--border-radius-sm)', border: '1px solid var(--border)' }}
                   />
                 </div>
-                <div className="form-group" style={{ marginBottom: '1rem' }}>
-                  <label htmlFor="company" style={{ display: 'block', marginBottom: '0.5rem' }}>Company</label>
+                <div className="form-group">
+                  <label htmlFor="company">Company</label>
                   <input
                     type="text"
                     id="company"
@@ -156,11 +154,10 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="Your company name"
                     className="form-control"
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--border-radius-sm)', border: '1px solid var(--border)' }}
                   />
                 </div>
-                <div className="form-group" style={{ marginBottom: '1rem' }}>
-                  <label htmlFor="phone" style={{ display: 'block', marginBottom: '0.5rem' }}>Phone Number *</label>
+                <div className="form-group">
+                  <label htmlFor="phone">Phone Number *</label>
                   <input
                     type="tel"
                     id="phone"
@@ -170,11 +167,10 @@ export default function Contact() {
                     required
                     placeholder="+91 1234567890"
                     className="form-control"
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--border-radius-sm)', border: '1px solid var(--border)' }}
                   />
                 </div>
-                <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                  <label htmlFor="message" style={{ display: 'block', marginBottom: '0.5rem' }}>Message *</label>
+                <div className="form-group">
+                  <label htmlFor="message">Message *</label>
                   <textarea
                     id="message"
                     name="message"
@@ -184,14 +180,13 @@ export default function Contact() {
                     placeholder="Tell us about your requirements..."
                     rows="5"
                     className="form-control"
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--border-radius-sm)', border: '1px solid var(--border)' }}
                   />
                 </div>
-                <button type="submit" disabled={loading} className="btn-primary" style={{ width: '100%' }}>
+                <button type="submit" disabled={loading} className="btn-primary">
                   {loading ? "Submitting..." : "Send Message"}
                 </button>
                 {response && (
-                  <div className={`response-message ${response.type}`} style={{ padding: '1rem', borderRadius: 'var(--border-radius-sm)', marginTop: '1rem', backgroundColor: response.type === 'success' ? 'var(--primary-light)' : '#f8d7da', color: response.type === 'success' ? 'var(--primary-dark)' : '#721c24', border: `1px solid ${response.type === 'success' ? 'var(--primary)' : '#f5c6cb'}` }}>
+                  <div className={`response-message ${response.type}`}>
                     {response.message}
                   </div>
                 )}
