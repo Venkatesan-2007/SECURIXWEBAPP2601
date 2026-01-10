@@ -48,107 +48,115 @@ export default function About() {
   }, []);
 
   if (loading) {
-    return <div className="page-section"><div className="page-section-content" style={{ textAlign: 'center' }}>Loading...</div></div>;
+    return (
+      <div className="page-container" style={{ textAlign: 'center', padding: '120px 0' }}>
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <div className="page-section">
-      <div className="page-section-content">
-        <h2>About <GradientText>SECURIX SERVICE</GradientText></h2>
-        
-        <p className="section-description">
-          {aboutData.mainContent || 'SECURIX SERVICE is a premier cybersecurity and digital innovation company dedicated to protecting your digital assets and ensuring secure online environments. With a team of certified security professionals and a proven track record, we deliver enterprise-grade security solutions tailored to your business needs.'}
-        </p>
-
-        {/* Mission & Vision Section */}
-        <div className="mission-vision-grid">
-          <div className="mission-card">
-            <h3>Our Mission</h3>
-            <p>{aboutData.mission || 'To empower organizations with advanced cybersecurity solutions that enable them to Scan vulnerabilities, Connect with secure technologies, and Grow with confidence in the digital landscape.'}</p>
-          </div>
-          <div className="vision-card">
-            <h3>Our Vision</h3>
-            <p>{aboutData.vision || 'To be the trusted partner for organizations worldwide, setting industry standards for cybersecurity excellence, innovation, and client success through cutting-edge solutions and expert guidance.'}</p>
+    <div className="about-page">
+      {/* Hero Section */}
+      <section className="hero-section" style={{ minHeight: '60vh', background: 'var(--light-gray)'}}>
+        <div className="page-container">
+          <div className="hero-content" style={{ maxWidth: '900px' }}>
+            <h1 className="hero-title">
+              About <span style={{ color: 'var(--primary)'}}>SECURIX</span>
+            </h1>
+            <p className="hero-description">
+              {aboutData.mainContent}
+            </p>
           </div>
         </div>
+      </section>
 
-        {/* Stats Section */}
-        <div className="stats-grid">
-          <div className="stat-card">
-            <div className="stat-number">
-              <CounterNumber target={500} suffix="+" delay={0} />
-            </div>
-            <p className="stat-label">Security Projects Completed</p>
+      {/* Mission & Vision Section */}
+      <section className="services-section">
+        <div className="page-container">
+          <div className="section-header">
+            <div className="section-subtitle">Our Purpose</div>
+            <h2>Mission & Vision</h2>
           </div>
-          <div className="stat-card">
-            <div className="stat-number">
-              <CounterNumber target={250} suffix="+" delay={1} />
+          <div className="mission-vision-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+            <div className="service-card">
+              <h3>Our Mission</h3>
+              <p>{aboutData.mission}</p>
             </div>
-            <p className="stat-label">Enterprise Clients</p>
-          </div>
-          <div className="stat-card">
-            <div className="stat-number">
-              <CounterNumber target={15} suffix="+" delay={2} />
+            <div className="service-card">
+              <h3>Our Vision</h3>
+              <p>{aboutData.vision}</p>
             </div>
-            <p className="stat-label">Years of Experience</p>
-          </div>
-          <div className="stat-card">
-            <div className="stat-number">
-              <CounterNumber target={99.9} suffix="%" delay={3} />
-            </div>
-            <p className="stat-label">Client Satisfaction Rate</p>
           </div>
         </div>
+      </section>
 
-        {/* Core Values */}
-        <h3 style={{ marginTop: '80px', marginBottom: '40px' }}>Core Values</h3>
-        <div className="services-cards-grid">
-          {coreValues.map((value, index) => (
-            <div key={index} className="card">
-              <div>
-                <h4 className="card-title">{value.icon} {value.title}</h4>
-                <p className="card-description">{value.desc}</p>
+
+
+      {/* Core Values Section */}
+      <section className="services-section">
+        <div className="page-container">
+          <div className="section-header">
+            <div className="section-subtitle">Our Principles</div>
+            <h2>Core Values</h2>
+          </div>
+          <div className="services-grid">
+            {coreValues.map((value, index) => (
+              <div key={index} className="service-card">
+                <div className="service-icon">{value.icon}</div>
+                <h3>{value.title}</h3>
+                <p>{value.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Expertise Section */}
+      <section className="projects-section">
+        <div className="page-container">
+          <div className="section-header">
+            <div className="section-subtitle">Our Skills</div>
+            <h2>Areas of Expertise</h2>
+          </div>
+          <div className="services-grid">
+            {expertise.map((exp, index) => (
+              <div key={index} className="service-card">
+                <div className="service-icon">{exp.icon}</div>
+                <h3>{exp.title}</h3>
+                <p>{exp.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="cta-section">
+        <div className="page-container">
+          <div className="cta-content">
+            <h2>Why Choose Securix?</h2>
+            <div className="projects-grid" style={{ marginTop: '48px', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+              <div className="project-card">
+                <h4>✓ Expert Team</h4>
+                <p>Certified security professionals with decades of combined experience.</p>
+              </div>
+              <div className="project-card">
+                <h4>✓ Proven Track Record</h4>
+                <p>Trusted by Fortune 500 companies and government agencies.</p>
+              </div>
+              <div className="project-card">
+                <h4>✓ 24/7 Support</h4>
+                <p>Round-the-clock monitoring and incident response.</p>
+              </div>
+              <div className="project-card">
+                <h4>✓ Custom Solutions</h4>
+                <p>Tailored security strategies designed for your industry.</p>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Areas of Expertise */}
-        <h3 style={{ marginTop: '80px', marginBottom: '40px' }}>Areas of Expertise</h3>
-        <div className="services-cards-grid">
-          {expertise.map((exp, index) => (
-            <div key={index} className="card">
-              <div>
-                <h4 className="card-title">{exp.icon} {exp.title}</h4>
-                <p className="card-description">{exp.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Why Choose Us */}
-        <div className="why-choose-us" style={{ marginTop: '80px', padding: '60px 40px', backgroundColor: '#f8f9fa', borderRadius: '12px' }}>
-          <h3 style={{ textAlign: 'center', marginBottom: '40px' }}>Why Choose Securix Service?</h3>
-          <div className="grid-2" style={{ gap: '40px' }}>
-            <div>
-              <h4 style={{ color: '#0f172a', marginBottom: '15px' }}>✓ Expert Team</h4>
-              <p>Certified security professionals with decades of combined experience in enterprise security solutions.</p>
-            </div>
-            <div>
-              <h4 style={{ color: '#0f172a', marginBottom: '15px' }}>✓ Proven Track Record</h4>
-              <p>Trusted by Fortune 500 companies and government agencies for critical security implementations.</p>
-            </div>
-            <div>
-              <h4 style={{ color: '#0f172a', marginBottom: '15px' }}>✓ 24/7 Support</h4>
-              <p>Round-the-clock monitoring and incident response to protect your business at all times.</p>
-            </div>
-            <div>
-              <h4 style={{ color: '#0f172a', marginBottom: '15px' }}>✓ Custom Solutions</h4>
-              <p>Tailored security strategies designed specifically for your industry and business requirements.</p>
-            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

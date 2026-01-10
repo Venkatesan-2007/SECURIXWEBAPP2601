@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import './Admin.css';
 
 export default function AdminLogin() {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, isAdminLogged } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAdminLogged) {
+      navigate('/admin-dashboard');
+    }
+  }, [isAdminLogged, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,57 +23,60 @@ export default function AdminLogin() {
     setLoading(true);
 
     setTimeout(() => {
-      const result = login(password);
+      const result = login(email, password);
       if (result.success) {
+        setEmail('');
         setPassword('');
         navigate('/admin-dashboard');
       } else {
         setError(result.message);
       }
       setLoading(false);
-    }, 500);
+    }, 800);
   };
 
   return (
-    <div className="admin-login-container">
-      <div className="admin-login-wrapper">
-        <div className="login-background">
-          <div className="login-particle p1"></div>
-          <div className="login-particle p2"></div>
-          <div className="login-particle p3"></div>
-        </div>
-
-        <div className="login-card">
-          <div className="login-header">
-            <div className="login-logo">
-              <span className="lock-icon">🔐</span>
-            </div>
-            <h1>SECURIX Admin</h1>
-            <p className="login-subtitle">Secure Access Portal</p>
+    <div className="admin-login-page">
+      <div className="admin-login-background"></div>
+      <div className="admin-login-container">
+        <div className="admin-login-card">
+          <div className="admin-login-header">
+            <span className="admin-login-logo">🛡️</span>
+            <h1>Administrator Access</h1>
+            <p>Enter your credentials to manage the Securix platform.</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="login-form">
+          <form onSubmit={handleSubmit} className="admin-login-form">
+            <div className="form-group">
+              <label htmlFor="email">Admin Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter admin email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={loading}
+                autoComplete="email"
+                required
+              />
+            </div>
             <div className="form-group">
               <label htmlFor="password">Admin Password</label>
-              <div className="password-input-wrapper">
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="Enter admin password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  disabled={loading}
-                  className="password-input"
-                  autoComplete="off"
-                  required
-                />
-                <div className="input-border"></div>
-              </div>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter secure password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
+                autoComplete="current-password"
+                required
+              />
             </div>
 
             {error && (
               <div className="error-message">
-                <span className="error-icon">⚠️</span>
+                <span>⚠️</span>
                 {error}
               </div>
             )}
@@ -73,7 +84,7 @@ export default function AdminLogin() {
             <button
               type="submit"
               disabled={loading || !password}
-              className="login-button"
+              className="btn-primary"
             >
               {loading ? (
                 <>
@@ -81,32 +92,15 @@ export default function AdminLogin() {
                   Authenticating...
                 </>
               ) : (
-                <>
-                  <span>🔓</span> Unlock Admin Panel
-                </>
+                'Unlock Dashboard'
               )}
             </button>
           </form>
 
-          <div className="login-footer">
-            <p className="security-note">
-              🛡️ This is a secured access point. Only authorized administrators can proceed.
+          <div className="admin-login-footer">
+            <p>
+              For authorized personnel only. All access is logged and monitored.
             </p>
-          </div>
-        </div>
-
-        <div className="security-features">
-          <div className="feature">
-            <span className="feature-icon">🔒</span>
-            <p>Password Protected</p>
-          </div>
-          <div className="feature">
-            <span className="feature-icon">⏱️</span>
-            <p>Auto Logout</p>
-          </div>
-          <div className="feature">
-            <span className="feature-icon">📊</span>
-            <p>Full Control</p>
           </div>
         </div>
       </div>

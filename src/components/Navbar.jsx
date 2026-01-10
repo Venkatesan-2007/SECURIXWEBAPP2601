@@ -37,15 +37,6 @@ export default function Navbar() {
     <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <div className="navbar-brand">
-          <img 
-            src="/src/assets/Logo.png" 
-            alt="Securix Logo" 
-            className="brand-logo"
-            onError={(e) => {
-              e.target.style.display = 'none';
-              e.target.nextSibling.style.display = 'block';
-            }}
-          />
           <span className="brand-text">SECURIX</span>
         </div>
         

@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 
 const AuthContext = createContext();
 
+const ADMIN_EMAIL = 'admin@securix.com'; // Example admin email
 const ADMIN_PASSWORD = 'secur@x';
 const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
 
@@ -86,15 +87,15 @@ export function AuthProvider({ children }) {
     };
   }, [isAdminLogged, lastActivity]);
 
-  const login = (password) => {
-    if (password === ADMIN_PASSWORD) {
+  const login = (email, password) => {
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
       setIsAdminLogged(true);
       setLastActivity(Date.now());
       localStorage.setItem('adminAuth', 'true');
       localStorage.setItem('adminAuthTime', Date.now().toString());
       return { success: true, message: 'Login successful!' };
     }
-    return { success: false, message: 'Invalid password. Access denied!' };
+    return { success: false, message: 'Invalid email or password. Access denied!' };
   };
 
   const logout = () => {
