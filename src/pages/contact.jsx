@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { GradientText } from "../components/TextReveal";
 
+// TODO: Replace 'YOUR_FORM_ID' with your actual Formspree Form ID
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -27,7 +30,7 @@ export default function Contact() {
     setResponse(null);
 
     try {
-      const res = await fetch("/api/contact/submit", {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,24 +38,22 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
-
       if (res.ok) {
         setResponse({
           type: "success",
-          message: data.message || "Thank you for contacting us! Our team will reach out within 24 hours.",
+          message: "✅ Thank you for contacting us! We'll respond within 24 hours.",
         });
         setFormData({ name: "", email: "", phone: "", company: "", message: "" });
       } else {
         setResponse({
           type: "error",
-          message: data.error || "Failed to submit your request",
+          message: "❌ Failed to send message. Please try again or email us directly.",
         });
       }
     } catch (error) {
       setResponse({
         type: "error",
-        message: "Network error. Please try again.",
+        message: "❌ Network error. Please check your connection and try again.",
       });
     } finally {
       setLoading(false);

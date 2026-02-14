@@ -15,15 +15,10 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (location.pathname === '/admin-dashboard' || location.pathname === '/admin-login') {
-    return null;
-  }
-
   const navItems = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About" },
     { path: "/services", label: "Services" },
-    { path: "/events", label: "Events" },
     { path: "/team", label: "Team" },
     { path: "/projects", label: "Projects" },
     { path: "/contact", label: "Contact" }
@@ -56,12 +51,6 @@ export default function Navbar() {
         </nav>
         
         <div className="nav-actions">
-          <button 
-            className="admin-btn"
-            onClick={() => window.location.href = '/admin-login'}
-          >
-            Admin
-          </button>
           <div className="menu-icon" onClick={toggleMenu}>
             <div className="menu-line"></div>
             <div className="menu-line"></div>
